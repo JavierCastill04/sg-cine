@@ -1,6 +1,6 @@
 export interface Asiento{
     id: string;
-    idSala: number,
-    ubicacion: {letraFila:string, columna:number};
+    sala: number;
+    ubicacion: {fila:number, columna:number};
     estado: "disponible" | "seleccionado" | "reservado";
 }
