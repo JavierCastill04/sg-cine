@@ -12,6 +12,7 @@ import PeliculaTable from "@/Components/PeliculaTable";
 import BuscadorPeliculas from "@/Components/BuscadorPeliculas";
 >>>>>>> cc276c0 (feat: agregar busqueda, filtros y disenios del modulo de peliculas)
 import type { Pelicula } from "@/types/Pelicula";
+import "@/Components/Peliculas.css";
 
 export default function Home() {
   const [peliculaEditando, setPeliculaEditando] =

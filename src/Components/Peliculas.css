@@ -1,0 +1,173 @@
+/* ===========================
+   REINICIO
+=========================== */
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+/* ===========================
+   ESTILOS GENERALES
+=========================== */
+
+body {
+  background-color: #070708;
+  color: #D7DDE6;
+  font-family: Courier, serif;
+  padding: 30px;
+}
+
+main {
+  max-width: 1100px;
+  margin: auto;
+}
+
+/* ===========================
+   TÍTULOS
+=========================== */
+
+h1 {
+  text-align: center;
+  color: #FFBF00;
+  margin-bottom: 30px;
+}
+
+h2 {
+  color: #FFBF00;
+  margin-bottom: 20px;
+}
+
+/* ===========================
+   TARJETAS
+=========================== */
+
+section {
+  background-color: #1B1C20;
+  padding: 25px;
+  margin-bottom: 25px;
+  border-left: 6px solid #FFBF00;
+  border-radius: 10px;
+  box-shadow: 0 4px 12px rgba(0,0,0,.45);
+}
+
+/* ===========================
+   FORMULARIOS
+=========================== */
+
+label {
+  display: block;
+  margin-top: 12px;
+  margin-bottom: 6px;
+  color: #D7DDE6;
+  font-weight: bold;
+}
+
+input,
+select {
+  width: 100%;
+  padding: 11px;
+  margin-bottom: 12px;
+  border: 2px solid #444;
+  border-radius: 6px;
+  background-color: #2A2B30;
+  color: #D7DDE6;
+  font-family: Courier, serif;
+  font-size: 15px;
+}
+
+input::placeholder {
+  color: #999;
+}
+
+input:focus,
+select:focus {
+  outline: none;
+  border-color: #FFBF00;
+  box-shadow: 0 0 10px rgba(255,191,0,.4);
+}
+
+/* ===========================
+   CHECKBOX
+=========================== */
+
+input[type="checkbox"] {
+  width: auto;
+  margin-right: 8px;
+  accent-color: #FFBF00;
+}
+
+/* ===========================
+   BOTONES
+=========================== */
+
+button {
+  background-color: #FFBF00;
+  color: #070708;
+  border: none;
+  padding: 10px 18px;
+  border-radius: 6px;
+  cursor: pointer;
+  font-family: Courier, serif;
+  font-weight: bold;
+  margin-right: 8px;
+  margin-top: 10px;
+  transition: .25s;
+}
+
+button:hover {
+  background-color: #FFD86B;
+  transform: scale(1.03);
+}
+
+/* ===========================
+   TABLA
+=========================== */
+
+table {
+  width: 100%;
+  border-collapse: collapse;
+  background-color: #1B1C20;
+}
+
+th {
+  background-color: #FFBF00;
+  color: #070708;
+}
+
+th,
+td {
+  border: 1px solid #3A3A3A;
+  padding: 12px;
+  text-align: center;
+}
+
+td {
+  color: #D7DDE6;
+}
+
+tbody tr:nth-child(even) {
+  background-color: #24252B;
+}
+
+tbody tr:hover {
+  background-color: #3A3115;
+}
+
+/* ===========================
+   RESPONSIVO
+=========================== */
+
+@media (max-width: 800px) {
+
+  body {
+    padding: 15px;
+  }
+
+  table {
+    display: block;
+    overflow-x: auto;
+    white-space: nowrap;
+  }
+}
