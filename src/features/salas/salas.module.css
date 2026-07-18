@@ -1,0 +1,71 @@
+.titleCard {
+    font-size: 1.2rem;
+    color: var(--color-enfasis);
+    margin-bottom: 1rem;
+}
+
+.salasTable {
+    width: 100%;
+    border-radius: 8px;
+    border-collapse: separate;
+    border-spacing: 0;
+    overflow: hidden;
+}
+
+.salasTable thead {
+    background-color: var(--color-enfasis);
+}
+
+.salasTable th,
+.salasTable td {
+    padding: 0.9rem 1rem;
+    text-align: center;
+    font-size: 0.9rem;
+    border: 0.1px solid var(--color-fondo);
+}
+
+.salasTable th {
+    font-weight: 600;
+}
+
+.salasTable td {
+    color: var(--color-superficie);
+}
+
+
+.salasTable tbody tr:nth-child(even) {
+    background-color: var(--color-texto-secundario);
+}
+
+.actions {
+    justify-content: center;
+    display: flex;
+    gap: 0.5rem;
+}
+
+.salasCard {
+    width: auto;
+    height: auto;
+    background-color: var(--color-secundario);
+    padding: 1rem;
+    border-radius: 8px;
+
+    box-shadow: -0.3rem  0 var(--color-enfasis);
+}
+
+.iconButton {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 0.4rem;
+    background: transparent;
+    color:var(--color-enfasis);
+    border: none;
+    cursor: pointer;
+    border-radius: 6px;
+    transition: background-color var(--transition);
+}
+
+.iconButton:hover {
+    background-color: var(--color-fondo);
+}
