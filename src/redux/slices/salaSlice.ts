@@ -3,8 +3,6 @@ import { Sala } from "@/types/Sala";
 import { salasData } from "@/data/salasData";
 import { Asiento } from "@/types/Asiento";
 
-const initialState: Sala[] = salasData;
-
 const obtenerLetraFila = (index: number): string => {
     let letra = "";
     let n = index + 1;
@@ -20,38 +18,46 @@ const obtenerLetraFila = (index: number): string => {
 const generarAsientos = (salaId: number, filas: number, columnas: number): Asiento[] => {
     const asientos: Asiento[] = [];
 
-    for (let fila = 1; fila <= filas; fila++) {
+    for (let fila = 0; fila < filas; fila++) {
         const letraFila = obtenerLetraFila(filas);
         for (let columna = 1; columna <= columnas; columna++) {
             asientos.push({
-                id: `${salaId}-${letraFila + columna}`,
+                id: `${salaId}-${letraFila}-${columna}`,
                 idSala: salaId,
-                ubicacion: { letraFila, columna },
-                estado: "disponible"
+                ubicacion: { letraFila, columna }
             });
         }
     }
     return asientos;
 };
 
+const initialState: Sala[] = salasData.map((sala)=>({
+    ...sala, asiento: generarAsientos(
+        sala.id,
+        sala.capacidad.filas,
+        sala.capacidad.columnas
+    )
+}))
+
 const salaSlice = createSlice({
     name: "sala",
     initialState,
     reducers: {
-        addSala: (state, action: PayloadAction<Omit<Sala, 'asientos'>>) => {
-            const listaAsientos = generarAsientos(action.payload.id, action.payload.capacidad.filas, action.payload.capacidad.columnas);
+        addSala: (state, action: PayloadAction<Omit<Sala, 'id' | 'asientos'>>) => {
+            const nuevoId = state.length > 0 ? Math.max(...state.map(s=>s.id)) + 1 : 1;
             const salaExistente = state.find(
-                sala => sala.id === action.payload.id || sala.nombre === action.payload.nombre
+                sala => sala.nombre === action.payload.nombre
             );
 
             if (salaExistente) {
                 //Notificar al usuario directamente, hacer luego.
-                console.log(`La ${action.payload.nombre} con id ${action.payload.id} ya existe. No se puede agregar.`);
+                console.log(`La ${action.payload.nombre} ya existe. No se puede agregar.`);
 
             } else {
                 state.push({
+                    id: nuevoId,
                     ...action.payload,
-                    asientos: listaAsientos
+                    asientos: generarAsientos( nuevoId, action.payload.capacidad.filas, action.payload.capacidad.columnas)
                 });
             }
         },
@@ -61,14 +67,6 @@ const salaSlice = createSlice({
 
             if (salaId !== -1) {
                 const salaActual = state[salaId];
-                const sinReservas = salaActual.asientos.every(
-                    asiento => asiento.estado === "disponible"
-                );
-
-                if (!sinReservas) {
-                    console.log("No se puede editar: La sala tiene asientos ocupados o reservados.");
-                    return;
-                }
 
                 const capacidadNueva = action.payload.capacidad;
                 //Evaluar si cambian las dimensiones
@@ -89,18 +87,18 @@ const salaSlice = createSlice({
             }
             else {
                 //Notificar al usuario directamente, hacer luego.
-                console.log(`La ${action.payload.nombre} con id ${action.payload.id} no existe o no se encontró. No se puede actualizar.`);
+                console.log(`No se encuentra la sala indicada`);
             }
         },
 
-        removeSala: (state, action: PayloadAction<Sala>) => {
-            const salaId = state.findIndex(sala => sala.id === action.payload.id);
+        removeSala: (state, action: PayloadAction<number>) => {
+            const salaId = state.findIndex(sala => sala.id === action.payload);
             if (salaId !== -1) {
                 state.splice(salaId, 1);
             }
             else {
                 //Notificar al usuario directamente, hacer luego.
-                console.log(`La ${action.payload.nombre} con id ${action.payload.id} no existe o no se encontró. No se puede eliminar.`);
+                console.log(`La sala no se pudo eliminar.`);
             }
         }
     }
