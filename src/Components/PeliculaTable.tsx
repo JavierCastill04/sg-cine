@@ -11,8 +11,27 @@ interface PeliculaTableProps {
   soloDisponibles: boolean;
 }
 
+interface PeliculaTableProps {
+  seleccionarPelicula: (pelicula: Pelicula) => void;
+  busqueda: string;
+}
+
+interface PeliculaTableProps {
+  seleccionarPelicula: (pelicula: Pelicula) => void;
+  busqueda: string;
+  generoSeleccionado: string;
+}
+
+interface PeliculaTableProps {
+  seleccionarPelicula: (pelicula: Pelicula) => void;
+  busqueda: string;
+  generoSeleccionado: string;
+  soloDisponibles: boolean;
+}
+
 export default function PeliculaTable({
   seleccionarPelicula,
+<<<<<<< HEAD
    busqueda,
    generoSeleccionado,
    soloDisponibles,
@@ -20,6 +39,15 @@ export default function PeliculaTable({
   const peliculas = useAppSelector((state) => state.pelicula);
   const dispatch = useAppDispatch();
  const peliculasFiltradas = peliculas.filter((pelicula) => {
+=======
+  busqueda,
+  generoSeleccionado,
+  soloDisponibles,
+}: PeliculaTableProps) {
+  const peliculas = useAppSelector((state) => state.pelicula);
+  const dispatch = useAppDispatch();
+  const peliculasFiltradas = peliculas.filter((pelicula) => {
+>>>>>>> cc276c0 (feat: agregar busqueda, filtros y disenios del modulo de peliculas)
   const coincideNombre = pelicula.nombre
     .toLowerCase()
     .includes(busqueda.toLowerCase());
@@ -41,8 +69,8 @@ export default function PeliculaTable({
     <section>
       <h2>Películas registradas</h2>
 
-      {peliculas.length === 0 ? (
-        <p>No hay películas registradas.</p>
+      {peliculasFiltradas.length === 0 ? (
+        <p>No se encontraron películas.</p>
       ) : (
         <table>
           <thead>

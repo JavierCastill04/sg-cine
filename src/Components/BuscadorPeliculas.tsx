@@ -15,7 +15,11 @@ export default function BuscadorPeliculas({
   generoSeleccionado,
   setGeneroSeleccionado,
   soloDisponibles,
+<<<<<<< HEAD
   onCambiarSoloDisponibles,
+=======
+   onCambiarSoloDisponibles,
+>>>>>>> cc276c0 (feat: agregar busqueda, filtros y disenios del modulo de peliculas)
 }: BuscadorPeliculasProps) {
   return (
     <section>
@@ -59,8 +63,13 @@ export default function BuscadorPeliculas({
             type="checkbox"
             checked={soloDisponibles}
             onChange={(event) =>
+<<<<<<< HEAD
               onCambiarSoloDisponibles(event.target.checked)
             }
+=======
+  onCambiarSoloDisponibles(event.target.checked)
+}
+>>>>>>> cc276c0 (feat: agregar busqueda, filtros y disenios del modulo de peliculas)
           />
 
           Mostrar solo disponibles
