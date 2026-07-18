@@ -15,11 +15,7 @@ export default function BuscadorPeliculas({
   generoSeleccionado,
   setGeneroSeleccionado,
   soloDisponibles,
-<<<<<<< HEAD
   onCambiarSoloDisponibles,
-=======
-   onCambiarSoloDisponibles,
->>>>>>> cc276c0 (feat: agregar busqueda, filtros y disenios del modulo de peliculas)
 }: BuscadorPeliculasProps) {
   return (
     <section>
@@ -33,12 +29,16 @@ export default function BuscadorPeliculas({
           type="text"
           placeholder="Ejemplo: Superman"
           value={busqueda}
-          onChange={(event) => setBusqueda(event.target.value)}
+          onChange={(event) =>
+            setBusqueda(event.target.value)
+          }
         />
       </div>
 
       <div>
-        <label htmlFor="genero">Filtrar por género</label>
+        <label htmlFor="genero">
+          Filtrar por género
+        </label>
 
         <select
           id="genero"
@@ -63,13 +63,10 @@ export default function BuscadorPeliculas({
             type="checkbox"
             checked={soloDisponibles}
             onChange={(event) =>
-<<<<<<< HEAD
-              onCambiarSoloDisponibles(event.target.checked)
+              onCambiarSoloDisponibles(
+                event.target.checked
+              )
             }
-=======
-  onCambiarSoloDisponibles(event.target.checked)
-}
->>>>>>> cc276c0 (feat: agregar busqueda, filtros y disenios del modulo de peliculas)
           />
 
           Mostrar solo disponibles

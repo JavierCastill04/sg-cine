@@ -1,26 +1,8 @@
 "use client";
 
+import type { Pelicula } from "@/types/Pelicula";
 import { useAppDispatch, useAppSelector } from "@/redux/hooks";
 import { removePelicula } from "@/redux/slices/peliculaSlice";
-import type { Pelicula } from "@/types/Pelicula";
-
-interface PeliculaTableProps {
-  seleccionarPelicula: (pelicula: Pelicula) => void;
-  busqueda: string;
-  generoSeleccionado: string;
-  soloDisponibles: boolean;
-}
-
-interface PeliculaTableProps {
-  seleccionarPelicula: (pelicula: Pelicula) => void;
-  busqueda: string;
-}
-
-interface PeliculaTableProps {
-  seleccionarPelicula: (pelicula: Pelicula) => void;
-  busqueda: string;
-  generoSeleccionado: string;
-}
 
 interface PeliculaTableProps {
   seleccionarPelicula: (pelicula: Pelicula) => void;
@@ -31,40 +13,41 @@ interface PeliculaTableProps {
 
 export default function PeliculaTable({
   seleccionarPelicula,
-<<<<<<< HEAD
-   busqueda,
-   generoSeleccionado,
-   soloDisponibles,
-}: PeliculaTableProps) {
-  const peliculas = useAppSelector((state) => state.pelicula);
-  const dispatch = useAppDispatch();
- const peliculasFiltradas = peliculas.filter((pelicula) => {
-=======
   busqueda,
   generoSeleccionado,
   soloDisponibles,
 }: PeliculaTableProps) {
-  const peliculas = useAppSelector((state) => state.pelicula);
   const dispatch = useAppDispatch();
-  const peliculasFiltradas = peliculas.filter((pelicula) => {
->>>>>>> cc276c0 (feat: agregar busqueda, filtros y disenios del modulo de peliculas)
-  const coincideNombre = pelicula.nombre
-    .toLowerCase()
-    .includes(busqueda.toLowerCase());
 
-  const coincideGenero =
-    generoSeleccionado === "" ||
-    pelicula.genero === generoSeleccionado;
-
-  const coincideDisponibilidad =
-    !soloDisponibles || pelicula.disponible;
-
-  return (
-    coincideNombre &&
-    coincideGenero &&
-    coincideDisponibilidad
+  const peliculas = useAppSelector(
+    (state) => state.pelicula
   );
-});
+
+  const peliculasFiltradas = peliculas.filter(
+    (pelicula) => {
+      const coincideNombre = pelicula.nombre
+        .toLowerCase()
+        .includes(busqueda.toLowerCase());
+
+      const coincideGenero =
+        generoSeleccionado === "" ||
+        pelicula.genero === generoSeleccionado;
+
+      const coincideDisponibilidad =
+        !soloDisponibles || pelicula.disponible;
+
+      return (
+        coincideNombre &&
+        coincideGenero &&
+        coincideDisponibilidad
+      );
+    }
+  );
+
+  const eliminarPelicula = (id: number) => {
+    dispatch(removePelicula(id));
+  };
+
   return (
     <section>
       <h2>Películas registradas</h2>
@@ -95,6 +78,7 @@ export default function PeliculaTable({
                 <td>{pelicula.duracion} minutos</td>
                 <td>{pelicula.clasificacion}</td>
                 <td>${pelicula.precio.toFixed(2)}</td>
+
                 <td>
                   {pelicula.disponible
                     ? "Disponible"
@@ -114,7 +98,7 @@ export default function PeliculaTable({
                   <button
                     type="button"
                     onClick={() =>
-                      dispatch(removePelicula(pelicula.id))
+                      eliminarPelicula(pelicula.id)
                     }
                   >
                     Eliminar
