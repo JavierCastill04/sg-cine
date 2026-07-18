@@ -5,7 +5,6 @@ export interface Pelicula {
   genero: string;
   duracion: number;
   clasificacion: string;
-  idSala: number;
   precio: number;
   disponible: boolean;
 }

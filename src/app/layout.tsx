@@ -1,19 +1,25 @@
-"use client";
-import "@/app/globals.css"
-import { Provider } from "react-redux";
-import store from "../redux/store";
-import Navbar from "../components/navbar/Navbar";
+import type { Metadata } from "next";
+import ReduxProvider from "@/redux/Provider";
+import Navbar from "@/components/navbar/Navbar";
+import "./globals.css";
+
+export const metadata: Metadata = {
+  title: "SG-CINE",
+  description: "Sistema de gestión de cine",
+};
 
 export default function RootLayout({
   children,
-}: {
+}: Readonly<{
   children: React.ReactNode;
-}) {
+}>) {
   return (
     <html lang="es">
       <body>
-        <Navbar />
-        {children}
+        <ReduxProvider>
+          <Navbar />
+          {children}
+        </ReduxProvider>
       </body>
     </html>
   );
