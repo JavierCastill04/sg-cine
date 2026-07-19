@@ -5,9 +5,10 @@
 }
 
 .salasTable {
-    width: 100%;
+    width: max-content;
     border-radius: 8px;
-    border-collapse: separate;
+    min-width: 100%;
+    border-collapse: collapse;
     border-spacing: 0;
     overflow: hidden;
 }
@@ -49,7 +50,6 @@
     background-color: var(--color-secundario);
     padding: 1rem;
     border-radius: 8px;
-
     box-shadow: -0.3rem  0 var(--color-enfasis);
 }
 

@@ -97,3 +97,8 @@ p {
   background: var(--color-enfasis);
   color: var(--color-primario);
 }
+
+.tableContainer {
+  width: 100%;
+  overflow-x: auto;
+}
