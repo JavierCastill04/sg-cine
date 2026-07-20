@@ -1,19 +1,23 @@
 "use client";
-import "@/app/globals.css"
+
 import { Provider } from "react-redux";
-import store from "../redux/store";
-import Navbar from "../components/navbar/Navbar";
+
+import { store } from "@/redux/store";
+import Navbar from "@/components/navbar/Navbar";
+import "./globals.css";
 
 export default function RootLayout({
   children,
-}: {
+}: Readonly<{
   children: React.ReactNode;
-}) {
+}>) {
   return (
     <html lang="es">
       <body>
-        <Navbar />
-        {children}
+        <Provider store={store}>
+          <Navbar />
+          {children}
+        </Provider>
       </body>
     </html>
   );

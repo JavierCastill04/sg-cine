@@ -1,0 +1,133 @@
+.peliculasPage {
+  width: min(100%, 1100px);
+  margin: auto;
+  padding: 30px;
+  color: #d7dde6;
+}
+
+.peliculasPage h1 {
+  text-align: center;
+  color: #ffbf00;
+  margin-bottom: 30px;
+}
+
+.peliculasPage h2 {
+  color: #ffbf00;
+  margin-bottom: 20px;
+}
+
+.peliculasPage section {
+  background-color: #1b1c20;
+  padding: 25px;
+  margin-bottom: 25px;
+  border-left: 6px solid #ffbf00;
+  border-radius: 10px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.45);
+}
+
+.peliculasPage label {
+  display: block;
+  margin-top: 12px;
+  margin-bottom: 6px;
+  color: #d7dde6;
+  font-weight: bold;
+}
+
+.peliculasPage input,
+.peliculasPage select {
+  width: 100%;
+  padding: 11px;
+  margin-bottom: 12px;
+  border: 2px solid #4f5560;
+  border-radius: 6px;
+  background-color: #5c6472;
+  color: #d7dde6;
+  font-family: Courier, serif;
+  font-size: 15px;
+}
+
+.peliculasPage input::placeholder {
+  color: #e5e7eb;
+}
+
+.peliculasPage input:focus,
+.peliculasPage select:focus {
+  outline: none;
+  border-color: #ffbf00;
+  box-shadow: 0 0 10px rgba(255, 191, 0, 0.4);
+}
+
+.peliculasPage input[type="checkbox"] {
+  width: auto;
+  margin-right: 8px;
+  accent-color: #ffbf00;
+}
+
+.peliculasPage button {
+  background-color: #ffbf00;
+  color: #070708;
+  border: none;
+  padding: 10px 18px;
+  border-radius: 6px;
+  cursor: pointer;
+  font-family: Courier, serif;
+  font-weight: bold;
+  margin-right: 8px;
+  margin-top: 10px;
+  transition: 0.25s;
+}
+
+.peliculasPage button:hover {
+  background-color: #ffd86b;
+  transform: scale(1.03);
+}
+
+.peliculasPage table {
+  width: 100%;
+  border-collapse: collapse;
+  background-color: #1b1c20;
+}
+
+.peliculasPage th {
+  background-color: #ffbf00;
+  color: #070708;
+}
+
+.peliculasPage th,
+.peliculasPage td {
+  border: 1px solid #3a3a3a;
+  padding: 12px;
+  text-align: center;
+}
+
+.peliculasPage td {
+  color: #d7dde6;
+}
+
+.peliculasPage tbody tr:nth-child(even) {
+  background-color: #5c6472;
+}
+
+.peliculasPage tbody tr:hover {
+  background-color: #3a3115;
+}
+
+.mensajeError {
+  margin-top: -6px;
+  margin-bottom: 10px;
+  color: #ff6b6b;
+  font-size: 0.85rem;
+  font-weight: bold;
+}
+
+@media (max-width: 800px) {
+  .peliculasPage {
+    padding: 15px;
+  }
+
+  .peliculasPage table {
+    display: block;
+    overflow-x: auto;
+    white-space: nowrap;
+  }
+}
