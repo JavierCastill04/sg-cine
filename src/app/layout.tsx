@@ -1,12 +1,10 @@
-import type { Metadata } from "next";
-import ReduxProvider from "@/redux/Provider";
+"use client";
+
+import { Provider } from "react-redux";
+
+import { store } from "@/redux/store";
 import Navbar from "@/components/navbar/Navbar";
 import "./globals.css";
-
-export const metadata: Metadata = {
-  title: "SG-CINE",
-  description: "Sistema de gestión de cine",
-};
 
 export default function RootLayout({
   children,
@@ -16,10 +14,10 @@ export default function RootLayout({
   return (
     <html lang="es">
       <body>
-        <ReduxProvider>
+        <Provider store={store}>
           <Navbar />
           {children}
-        </ReduxProvider>
+        </Provider>
       </body>
     </html>
   );
