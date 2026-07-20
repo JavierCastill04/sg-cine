@@ -5,6 +5,8 @@ export const GENEROS = [
   "Suspenso",
   "Romance",
   "Comedia",
+  "Aventura",
+  "Ciencia Ficción",
 ] as const;
 
 export const CLASIFICACIONES = [
