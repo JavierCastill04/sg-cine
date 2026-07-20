@@ -4,6 +4,14 @@
     margin-bottom: 1rem;
 }
 
+.msg {
+    font-size: 1rem;
+    color: var(--color-superficie);
+    text-align: center;
+}
+
+/*Tabla*/
+
 .salasTable {
     width: max-content;
     border-radius: 8px;
@@ -22,7 +30,6 @@
     padding: 0.9rem 1rem;
     text-align: center;
     font-size: 0.9rem;
-    border: 0.1px solid var(--color-fondo);
 }
 
 .salasTable th {
@@ -50,7 +57,8 @@
     background-color: var(--color-secundario);
     padding: 1rem;
     border-radius: 8px;
-    box-shadow: -0.3rem  0 var(--color-enfasis);
+    box-shadow: -0.3rem 0 var(--color-enfasis);
+    margin-bottom: 1.5rem;
 }
 
 .iconButton {
@@ -59,7 +67,7 @@
     justify-content: center;
     padding: 0.4rem;
     background: transparent;
-    color:var(--color-enfasis);
+    color: var(--color-enfasis);
     border: none;
     cursor: pointer;
     border-radius: 6px;
@@ -68,4 +76,61 @@
 
 .iconButton:hover {
     background-color: var(--color-fondo);
+}
+
+/*Form*/
+.formCampo {
+    margin-bottom: 1rem;
+}
+
+.formLabel {
+    font-weight: 600;
+    font-size: 0.9rem;
+    color: var(--color-superficie)
+}
+
+.formInput {
+    width: 100%;
+    padding: 10px 14px;
+    border-radius: 8px;
+    outline: none;
+    border: 2px solid;
+    font-size: 0.9rem;
+    box-sizing: border-box;
+    margin-top: 6px;
+}
+
+.input {
+    border: 2px solid #e2e8f0;
+}
+
+.inputError {
+    border-color: #c0392b;
+}
+
+.inputSuccess {
+    border-color: #00a651;
+}
+
+.error {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    color: #c0392b;
+    font-size: .78rem;
+    margin-top: 4px;
+    font-weight: 600;
+}
+
+/*Botones*/
+.btnFormulario {
+    width: 100%;
+    padding: 12px;
+    background: var(--color-enfasis);
+    color: var(--color-texto);
+    border: none;
+    border-radius: 8px;
+    font-size: 1rem;
+    font-weight: 700;
+    cursor: pointer;
 }

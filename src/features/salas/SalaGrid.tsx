@@ -1,15 +1,23 @@
 "use client";
 
-import { salasData } from "@/data/salasData";
-import { useAppDispatch } from "@/redux/hooks";
+import { removeSala} from "@/redux/slices/salaSlice"
+import { useAppDispatch, useAppSelector } from "@/redux/hooks";
 import { SquarePen, SquareX } from "lucide-react";
+import { Sala } from "@/types/Sala";
 
 import styles from "@/features/salas/salas.module.css"
 
-export default function ProductGrid() {
+interface Props {
+    editarSala: ( sala: Sala) => void;
+}
+
+export default function SalaGrid({editarSala}: Props) {
     const dispatch = useAppDispatch();
+    const salas = useAppSelector((state)=>state.sala);
 
     return (
+        <div className={styles.salasCard}>
+            <h1 className ={styles.titleCard}>Gestión de salas</h1>
         <div className="tableContainer">
             <table className={styles.salasTable}>
                 <thead>
@@ -24,7 +32,7 @@ export default function ProductGrid() {
                 </thead>
 
                 <tbody>
-                    {salasData.map((sala) => (
+                    {salas.map((sala) => (
                         <tr key={sala.id}>
                             <td>{sala.id}</td>
                             <td>{sala.nombre}</td>
@@ -32,13 +40,14 @@ export default function ProductGrid() {
                             <td>{sala.capacidad.columnas}</td>
                             <td>{sala.capacidad.filas * sala.capacidad.columnas}</td>
                             <td className={styles.actions}>
-                                <button className={styles.iconButton}><SquarePen /></button>
-                                <button className={styles.iconButton}><SquareX /></button>
+                                <button className={styles.iconButton} onClick={()=> editarSala(sala)} ><SquarePen /></button>
+                                <button className={styles.iconButton} onClick={()=> dispatch(removeSala(sala.id))}><SquareX /></button>
                             </td>
                         </tr>
                     ))}
                 </tbody>
             </table>
+            </div>
         </div>
     );
 }

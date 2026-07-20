@@ -31,7 +31,7 @@ const generarAsientos = (salaId: number, filas: number, columnas: number): Asien
     return asientos;
 };
 
-const initialState: Sala[] = salasData.map((sala)=>({
+const initialState: Sala[] = salasData.map((sala) => ({
     ...sala, asiento: generarAsientos(
         sala.id,
         sala.capacidad.filas,
@@ -44,7 +44,7 @@ const salaSlice = createSlice({
     initialState,
     reducers: {
         addSala: (state, action: PayloadAction<Omit<Sala, 'id' | 'asientos'>>) => {
-            const nuevoId = state.length > 0 ? Math.max(...state.map(s=>s.id)) + 1 : 1;
+            const nuevoId = state.length > 0 ? Math.max(...state.map(s => s.id)) + 1 : 1;
             const salaExistente = state.find(
                 sala => sala.nombre === action.payload.nombre
             );
@@ -57,14 +57,13 @@ const salaSlice = createSlice({
                 state.push({
                     id: nuevoId,
                     ...action.payload,
-                    asientos: generarAsientos( nuevoId, action.payload.capacidad.filas, action.payload.capacidad.columnas)
+                    asientos: generarAsientos(nuevoId, action.payload.capacidad.filas, action.payload.capacidad.columnas)
                 });
             }
         },
 
         updateSala: (state, action: PayloadAction<Sala>) => {
             const salaId = state.findIndex(sala => sala.id === action.payload.id);
-
             if (salaId !== -1) {
                 const salaActual = state[salaId];
 
