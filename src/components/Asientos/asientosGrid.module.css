@@ -1,0 +1,17 @@
+.grid {
+    display: grid;
+    gap: .5rem;
+    width: max-content;
+}
+
+.asiento {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    padding: .5rem;
+    background-color: var(--color-secundario);
+    color: var(--color-enfasis);
+    border-radius: 8px;
+    cursor: pointer;
+}

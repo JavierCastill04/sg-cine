@@ -40,6 +40,7 @@ a {
   text-decoration: none;
 }
 
+label,
 button,
 input,
 textarea,
@@ -96,4 +97,9 @@ p {
 ::selection {
   background: var(--color-enfasis);
   color: var(--color-primario);
+}
+
+.tableContainer {
+  width: 100%;
+  overflow-x: auto;
 }
