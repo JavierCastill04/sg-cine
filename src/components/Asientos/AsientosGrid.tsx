@@ -1,5 +1,6 @@
 import { Armchair } from "lucide-react";
 import styles from "@/components/Asientos/asientosGrid.module.css";
+import { obtenerLetraFila } from "@/components/Asientos/asientosUtils";
 
 interface SeatGridProps {
     filas: number;
@@ -10,21 +11,6 @@ export default function AsientosGrid({
     filas,
     columnas
 }: SeatGridProps) {
-
-    const asientos = Array.from(
-        { length: filas * columnas }
-    );
-    const obtenerLetraFila = (index: number): string => {
-        let letra = "";
-        let n = index + 1;
-
-        while (n > 0) {
-            let resto = (n - 1) % 26;
-            letra = String.fromCharCode(65 + resto) + letra;
-            n = Math.floor((n - resto) / 26);
-        }
-        return letra;
-    };
 
     return (
         <div className={styles.grid} style={{ gridTemplateColumns: `repeat(${columnas}, 1fr)` }}>

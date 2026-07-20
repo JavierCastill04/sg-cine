@@ -7,7 +7,6 @@ import { useAppDispatch, useAppSelector } from "@/redux/hooks";
 import { addSala, updateSala } from "@/redux/slices/salaSlice";
 import { Campo, FormData, FormErrors, validarCampo } from "@/features/salas/validarSala";
 import AsientosGrid from "@/components/Asientos/AsientosGrid";
-import { printTreeView } from "next/dist/build/utils";
 
 const initialData: FormData = { nombre: "", filas: "", columnas: "" };
 const initialErrors: FormErrors = { nombre: "", filas: "", columnas: "" };
