@@ -1,7 +1,11 @@
 "use client";
 
-import { useState, type FormEvent } from "react";
+import { useState } from "react";
 import styles from "@/components/Peliculas.module.css";
+
+import CampoFormulario from "@/components/CampoFormulario";
+import SelectFormulario from "@/components/SelectFormulario";
+
 import { useAppDispatch, useAppSelector } from "@/redux/hooks";
 import {
   addPelicula,
@@ -10,136 +14,22 @@ import {
 
 import type { Pelicula } from "@/types/Pelicula";
 
+import {
+  erroresIniciales,
+  validarCampo,
+  type CampoPelicula,
+  type ErroresPelicula,
+} from "@/components/validacionesPelicula";
 
-
-type Campo =
-  | "codigo"
-  | "nombre"
-  | "genero"
-  | "duracion"
-  | "clasificacion"
-  | "precio";
-
-type ErroresFormulario = Record<Campo, string>;
+import {
+  GENEROS,
+  CLASIFICACIONES,
+} from "@/components/peliculaOptions";
 
 interface PeliculaFormProps {
   peliculaEditando: Pelicula | null;
   cancelarEdicion: () => void;
 }
-
-
-
-const erroresIniciales: ErroresFormulario = {
-  codigo: "",
-  nombre: "",
-  genero: "",
-  duracion: "",
-  clasificacion: "",
-  precio: "",
-};
-
-
-
-function validarCampo(
-  campo: Campo,
-  valor: string,
-  peliculas: Pelicula[],
-  peliculaEditando: Pelicula | null,
-): string {
-  const valorLimpio = valor.trim();
-
-  switch (campo) {
-    case "codigo": {
-      if (!valorLimpio) {
-        return "El código es obligatorio.";
-      }
-
-      if (valorLimpio.length < 3) {
-        return "El código debe tener al menos 3 caracteres.";
-      }
-
-      const codigoNormalizado = valorLimpio.toLowerCase();
-
-      const codigoDuplicado = peliculas.some(
-        (pelicula) =>
-          pelicula.codigo.trim().toLowerCase() ===
-            codigoNormalizado &&
-          pelicula.id !== peliculaEditando?.id,
-      );
-
-      if (codigoDuplicado) {
-        return "Ya existe una película con este código.";
-      }
-
-      return "";
-    }
-
-    case "nombre":
-      if (!valorLimpio) {
-        return "El nombre es obligatorio.";
-      }
-
-      if (valorLimpio.length < 3) {
-        return "El nombre debe tener al menos 3 caracteres.";
-      }
-
-      return "";
-
-    case "genero":
-      if (!valorLimpio) {
-        return "El género es obligatorio.";
-      }
-
-      if (valorLimpio.length < 3) {
-        return "El género debe tener al menos 3 caracteres.";
-      }
-
-      return "";
-
-    case "duracion": {
-      if (!valorLimpio) {
-        return "La duración es obligatoria.";
-      }
-
-      const duracionNumero = Number(valor);
-
-      if (
-        !Number.isInteger(duracionNumero) ||
-        duracionNumero <= 0
-      ) {
-        return "La duración debe ser un número entero mayor que cero.";
-      }
-
-      return "";
-    }
-
-    case "clasificacion":
-      if (!valorLimpio) {
-        return "La clasificación es obligatoria.";
-      }
-
-      return "";
-
-    case "precio": {
-      if (!valorLimpio) {
-        return "El precio es obligatorio.";
-      }
-
-      const precioNumero = Number(valor);
-
-      if (Number.isNaN(precioNumero) || precioNumero < 0) {
-        return "El precio debe ser un número mayor o igual a cero.";
-      }
-
-      return "";
-    }
-
-    default:
-      return "";
-  }
-}
-
-
 
 export default function PeliculaForm({
   peliculaEditando,
@@ -184,54 +74,54 @@ export default function PeliculaForm({
   );
 
   const [errores, setErrores] =
-    useState<ErroresFormulario>(erroresIniciales);
+    useState<ErroresPelicula>({
+      ...erroresIniciales,
+    });
 
+  const obtenerValoresFormulario =
+    (): Record<CampoPelicula, string> => ({
+      codigo,
+      nombre,
+      genero,
+      duracion,
+      clasificacion,
+      precio,
+    });
 
-
-  const actualizarCampo = (
-    campo: Campo,
+  const obtenerErrorCampo = (
+    campo: CampoPelicula,
     valor: string,
-  ): void => {
-    switch (campo) {
-      case "codigo":
-        setCodigo(valor);
-        break;
-
-      case "nombre":
-        setNombre(valor);
-        break;
-
-      case "genero":
-        setGenero(valor);
-        break;
-
-      case "duracion":
-        setDuracion(valor);
-        break;
-
-      case "clasificacion":
-        setClasificacion(valor);
-        break;
-
-      case "precio":
-        setPrecio(valor);
-        break;
-    }
-
-    const mensajeError = validarCampo(
+  ): string =>
+    validarCampo({
       campo,
       valor,
       peliculas,
       peliculaEditando,
-    );
+    });
+
+  const actualizarCampo = (
+    campo: CampoPelicula,
+    valor: string,
+  ): void => {
+    const setters: Record<
+      CampoPelicula,
+      React.Dispatch<React.SetStateAction<string>>
+    > = {
+      codigo: setCodigo,
+      nombre: setNombre,
+      genero: setGenero,
+      duracion: setDuracion,
+      clasificacion: setClasificacion,
+      precio: setPrecio,
+    };
+
+    setters[campo](valor);
 
     setErrores((erroresAnteriores) => ({
       ...erroresAnteriores,
-      [campo]: mensajeError,
+      [campo]: obtenerErrorCampo(campo, valor),
     }));
   };
-
-
 
   const limpiarFormulario = (): void => {
     setCodigo("");
@@ -241,64 +131,30 @@ export default function PeliculaForm({
     setClasificacion("");
     setPrecio("");
     setDisponible(true);
-    setErrores(erroresIniciales);
+    setErrores({ ...erroresIniciales });
   };
 
-
-
   const validarFormularioCompleto =
-    (): ErroresFormulario => ({
-      codigo: validarCampo(
-        "codigo",
-        codigo,
-        peliculas,
-        peliculaEditando,
-      ),
+    (): ErroresPelicula => {
+      const valores = obtenerValoresFormulario();
 
-      nombre: validarCampo(
-        "nombre",
-        nombre,
-        peliculas,
-        peliculaEditando,
-      ),
+      return (
+        Object.keys(valores) as CampoPelicula[]
+      ).reduce<ErroresPelicula>(
+        (nuevosErrores, campo) => ({
+          ...nuevosErrores,
+          [campo]: obtenerErrorCampo(
+            campo,
+            valores[campo],
+          ),
+        }),
+        { ...erroresIniciales },
+      );
+    };
 
-      genero: validarCampo(
-        "genero",
-        genero,
-        peliculas,
-        peliculaEditando,
-      ),
-
-      duracion: validarCampo(
-        "duracion",
-        duracion,
-        peliculas,
-        peliculaEditando,
-      ),
-
-      clasificacion: validarCampo(
-        "clasificacion",
-        clasificacion,
-        peliculas,
-        peliculaEditando,
-      ),
-
-      precio: validarCampo(
-        "precio",
-        precio,
-        peliculas,
-        peliculaEditando,
-      ),
-    });
-
-
-
-  const handleSubmit = (
-    event: FormEvent<HTMLFormElement>,
-  ): void => {
-    event.preventDefault();
-
-    const nuevosErrores = validarFormularioCompleto();
+  const guardarPelicula = (): void => {
+    const nuevosErrores =
+      validarFormularioCompleto();
 
     setErrores(nuevosErrores);
 
@@ -311,11 +167,11 @@ export default function PeliculaForm({
     }
 
     const datosPelicula = {
-      codigo: codigo.trim(),
+      codigo: codigo.trim().toUpperCase(),
       nombre: nombre.trim(),
-      genero: genero.trim(),
+      genero,
       duracion: Number(duracion),
-      clasificacion: clasificacion.trim(),
+      clasificacion,
       precio: Number(precio),
       disponible,
     };
@@ -331,13 +187,13 @@ export default function PeliculaForm({
       cancelarEdicion();
     } else {
       const nuevoId =
-        peliculas.length > 0
-          ? Math.max(
+        peliculas.length === 0
+          ? 1
+          : Math.max(
               ...peliculas.map(
                 (pelicula) => pelicula.id,
               ),
-            ) + 1
-          : 1;
+            ) + 1;
 
       dispatch(
         addPelicula({
@@ -350,6 +206,11 @@ export default function PeliculaForm({
     limpiarFormulario();
   };
 
+  const cancelarFormulario = (): void => {
+    limpiarFormulario();
+    cancelarEdicion();
+  };
+
   return (
     <section>
       <h2>
@@ -358,153 +219,108 @@ export default function PeliculaForm({
           : "Agregar película"}
       </h2>
 
-      <form onSubmit={handleSubmit} noValidate>
+      <form
+        noValidate
+        onSubmit={(event) => {
+          event.preventDefault();
+          guardarPelicula();
+        }}
+      >
+        <CampoFormulario
+          id="codigo"
+          label="Código"
+          value={codigo}
+          error={errores.codigo}
+          errorClassName={styles.mensajeError}
+          placeholder="PEL-001"
+          maxLength={7}
+          onChange={(valor) =>
+            actualizarCampo(
+              "codigo",
+              valor.toUpperCase(),
+            )
+          }
+        />
+
+        <CampoFormulario
+          id="nombre"
+          label="Nombre"
+          value={nombre}
+          error={errores.nombre}
+          errorClassName={styles.mensajeError}
+          onChange={(valor) =>
+            actualizarCampo("nombre", valor)
+          }
+        />
+
+        <SelectFormulario
+          id="genero"
+          label="Género"
+          value={genero}
+          options={GENEROS}
+          placeholder="Seleccione un género"
+          error={errores.genero}
+          errorClassName={styles.mensajeError}
+          onChange={(valor) =>
+            actualizarCampo("genero", valor)
+          }
+        />
+
+        <CampoFormulario
+          id="duracion"
+          label="Duración en minutos"
+          type="number"
+          value={duracion}
+          error={errores.duracion}
+          errorClassName={styles.mensajeError}
+          min={1}
+          max={600}
+          step={1}
+          onChange={(valor) =>
+            actualizarCampo("duracion", valor)
+          }
+        />
+
+        <SelectFormulario
+          id="clasificacion"
+          label="Clasificación"
+          value={clasificacion}
+          options={CLASIFICACIONES}
+          placeholder="Seleccione una clasificación"
+          error={errores.clasificacion}
+          errorClassName={styles.mensajeError}
+          onChange={(valor) =>
+            actualizarCampo(
+              "clasificacion",
+              valor,
+            )
+          }
+        />
+
+        <CampoFormulario
+          id="precio"
+          label="Precio"
+          type="number"
+          value={precio}
+          error={errores.precio}
+          errorClassName={styles.mensajeError}
+          min={0}
+          step="0.01"
+          onChange={(valor) =>
+            actualizarCampo("precio", valor)
+          }
+        />
+
         <div>
-          <label htmlFor="codigo">Código</label>
-
-          <input
-            id="codigo"
-            type="text"
-            value={codigo}
-            onChange={(event) =>
-              actualizarCampo(
-                "codigo",
-                event.target.value,
-              )
-            }
-          />
-
-          {errores.codigo && (
-            <p className={styles.mensajeError}>
-              ⚠ {errores.codigo}
-            </p>
-          )}
-        </div>
-
-        <div>
-          <label htmlFor="nombre">Nombre</label>
-
-          <input
-            id="nombre"
-            type="text"
-            value={nombre}
-            onChange={(event) =>
-              actualizarCampo(
-                "nombre",
-                event.target.value,
-              )
-            }
-          />
-
-          {errores.nombre && (
-            <p className={styles.mensajeError}>
-              ⚠ {errores.nombre}
-            </p>
-          )}
-        </div>
-
-        <div>
-          <label htmlFor="genero">Género</label>
-
-          <input
-            id="genero"
-            type="text"
-            value={genero}
-            onChange={(event) =>
-              actualizarCampo(
-                "genero",
-                event.target.value,
-              )
-            }
-          />
-
-          {errores.genero && (
-            <p className={styles.mensajeError}>
-              ⚠ {errores.genero}
-            </p>
-          )}
-        </div>
-
-        <div>
-          <label htmlFor="duracion">
-            Duración en minutos
+          <label htmlFor="disponible">
+            Estado
           </label>
-
-          <input
-            id="duracion"
-            type="number"
-            min="1"
-            step="1"
-            value={duracion}
-            onChange={(event) =>
-              actualizarCampo(
-                "duracion",
-                event.target.value,
-              )
-            }
-          />
-
-          {errores.duracion && (
-            <p className={styles.mensajeError}>
-              ⚠ {errores.duracion}
-            </p>
-          )}
-        </div>
-
-        <div>
-          <label htmlFor="clasificacion">
-            Clasificación
-          </label>
-
-          <input
-            id="clasificacion"
-            type="text"
-            value={clasificacion}
-            onChange={(event) =>
-              actualizarCampo(
-                "clasificacion",
-                event.target.value,
-              )
-            }
-          />
-
-          {errores.clasificacion && (
-            <p className={styles.mensajeError}>
-              ⚠ {errores.clasificacion}
-            </p>
-          )}
-        </div>
-
-        <div>
-          <label htmlFor="precio">Precio</label>
-
-          <input
-            id="precio"
-            type="number"
-            min="0"
-            step="0.01"
-            value={precio}
-            onChange={(event) =>
-              actualizarCampo(
-                "precio",
-                event.target.value,
-              )
-            }
-          />
-
-          {errores.precio && (
-            <p className={styles.mensajeError}>
-              ⚠ {errores.precio}
-            </p>
-          )}
-        </div>
-
-        <div>
-          <label htmlFor="disponible">Estado</label>
 
           <select
             id="disponible"
-            value={disponible ? "true" : "false"}
+            value={
+              disponible ? "true" : "false"
+            }
             onChange={(event) =>
               setDisponible(
                 event.target.value === "true",
@@ -530,10 +346,7 @@ export default function PeliculaForm({
         {peliculaEditando && (
           <button
             type="button"
-            onClick={() => {
-              limpiarFormulario();
-              cancelarEdicion();
-            }}
+            onClick={cancelarFormulario}
           >
             Cancelar edición
           </button>

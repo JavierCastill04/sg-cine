@@ -3,6 +3,8 @@
 import type { Pelicula } from "@/types/Pelicula";
 import { useAppDispatch, useAppSelector } from "@/redux/hooks";
 import { removePelicula } from "@/redux/slices/peliculaSlice";
+import { Pencil, Trash2 } from "lucide-react";
+import styles from "@/components/Peliculas.module.css";
 
 interface PeliculaTableProps {
   seleccionarPelicula: (pelicula: Pelicula) => void;
@@ -20,7 +22,7 @@ export default function PeliculaTable({
   const dispatch = useAppDispatch();
 
   const peliculas = useAppSelector(
-    (state) => state.pelicula
+    (state) => state.pelicula,
   );
 
   const peliculasFiltradas = peliculas.filter(
@@ -41,10 +43,10 @@ export default function PeliculaTable({
         coincideGenero &&
         coincideDisponibilidad
       );
-    }
+    },
   );
 
-  const eliminarPelicula = (id: number) => {
+  const eliminarPelicula = (id: number): void => {
     dispatch(removePelicula(id));
   };
 
@@ -86,23 +88,37 @@ export default function PeliculaTable({
                 </td>
 
                 <td>
-                  <button
-                    type="button"
-                    onClick={() =>
-                      seleccionarPelicula(pelicula)
-                    }
-                  >
-                    Editar
-                  </button>
+                  <div className={styles.acciones}>
+                    <button
+                      type="button"
+                      className={styles.botonIcono}
+                      onClick={() =>
+                        seleccionarPelicula(pelicula)
+                      }
+                      aria-label={`Editar ${pelicula.nombre}`}
+                      title="Editar película"
+                    >
+                      <Pencil
+                        size={18}
+                        aria-hidden="true"
+                      />
+                    </button>
 
-                  <button
-                    type="button"
-                    onClick={() =>
-                      eliminarPelicula(pelicula.id)
-                    }
-                  >
-                    Eliminar
-                  </button>
+                    <button
+                      type="button"
+                      className={`${styles.botonIcono} ${styles.botonEliminar}`}
+                      onClick={() =>
+                        eliminarPelicula(pelicula.id)
+                      }
+                      aria-label={`Eliminar ${pelicula.nombre}`}
+                      title="Eliminar película"
+                    >
+                      <Trash2
+                        size={18}
+                        aria-hidden="true"
+                      />
+                    </button>
+                  </div>
                 </td>
               </tr>
             ))}
