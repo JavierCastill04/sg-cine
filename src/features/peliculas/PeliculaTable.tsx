@@ -4,7 +4,7 @@ import type { Pelicula } from "@/types/Pelicula";
 import { useAppDispatch, useAppSelector } from "@/redux/hooks";
 import { removePelicula } from "@/redux/slices/peliculaSlice";
 import { Pencil, Trash2 } from "lucide-react";
-import styles from "@/components/Peliculas.module.css";
+import styles from "@/features/peliculas/Peliculas.module.css";
 
 interface PeliculaTableProps {
   seleccionarPelicula: (pelicula: Pelicula) => void;
