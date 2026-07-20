@@ -1,0 +1,116 @@
+.pageContainer {
+    max-width: var(--max-width);
+    margin: auto;
+}
+
+.pageTitle {
+    text-align: center;
+    margin: 30px 0;
+    font-size: 2rem;
+}
+
+.carteleraGrid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 20px;
+}
+
+@media (max-width: 992px) {
+    .carteleraGrid {
+        grid-template-columns: repeat(2, 1fr);
+    }
+}
+
+@media (max-width: 576px) {
+    .carteleraGrid {
+        grid-template-columns: 1fr;
+    }
+}
+
+.carteleraCard {
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+    background: var(--color-secundario);
+    border-radius: var(--radius);
+    overflow: hidden;
+    box-shadow: var(--shadow);
+    transition: var(--transition);
+
+}
+
+.carteleraCard:hover {
+    transform: translateY(-8px);
+    box-shadow: var(--shadow);
+}
+
+.carteleraInfo {
+    padding: 15px;
+    font-size: 1.2rem;
+    font-weight: bold;
+}
+
+.carteleraTitle {
+    margin: px 0;
+    min-height: 50px;
+    text-align: center;
+    color: var(--color-superficie);
+}
+
+.carteleraText {
+    font-size: 0.8rem;
+    font-weight: bold;
+    padding: 0.1rem 0.9rem;
+    width: fit-content;
+    background-color: var(--color-enfasis);
+    border-radius: var(--radius);
+}
+
+.etiquetaTitle {
+    font-size: 0.9rem;
+    color: var(--color-superficie);
+}
+
+.carteleraEtiquetas {
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+    gap: .5rem;
+    margin: 0rem 0.5rem 1rem;
+    padding: 0.5rem;
+    border: 0.08rem solid var(--color-superficie);
+    border-radius: var(--radius);
+}
+
+.etiquetaGenero {
+    background-color: blueviolet;
+    color: var(--color-superficie)
+}
+
+.etiquetaDuracion {
+    background-color: green;
+    color: var(--color-superficie)
+}
+
+.etiquetaClasificacion {
+    background-color: darkslategrey;
+    color: var(--color-superficie)
+}
+
+.addButton {
+    font-weight: 600;
+    margin-top: auto;
+    width: 100%;
+    background: var(--color-enfasis);
+    color: var(--color-texto);
+    border: none;
+    border-radius: var(--radius);
+    padding: 12px;
+    font-size: 1rem;
+    cursor: pointer;
+    transition: var(--transition);
+}
+
+.addButton:hover {
+    background: var(--color-enfasis-hover);
+}
