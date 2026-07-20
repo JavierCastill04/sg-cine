@@ -14,4 +14,17 @@
     color: var(--color-enfasis);
     border-radius: 8px;
     cursor: pointer;
+    transition: var(--transition);
+}
+
+.seleccionado {
+    background-color: var(--color-enfasis);
+    color: var(--color-texto);
+    transform: scale(1.05);
+}
+
+.reservado {
+    background-color: #777;
+    color: white;
+    cursor: not-allowed;
 }

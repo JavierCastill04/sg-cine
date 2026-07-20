@@ -170,8 +170,10 @@
     border-bottom: 1px solid var(--color-borde);
 }
 
-.peliculaInfo {
-    padding: 1.5rem;
+.peliculaInfo p {
+    padding: 1rem;
+    gap: 1rem;
+    color: var(--color-superficie)
 }
 
 .funcionesContainer {
@@ -208,4 +210,50 @@
     background: none;
     border: none;
     cursor: pointer;
+    font-weight: 600;
+}
+
+.reservaModal {
+    width: min(1000px, 90vw);
+    max-height: 90vh;
+    background: var(--color-fondo);
+    border-radius: var(--radius);
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+}
+
+.reservaContenido {
+    padding: 1.5rem;
+    overflow-y: auto;
+}
+
+.clienteForm {
+    display: flex;
+    flex-direction: column;
+    gap: .8rem;
+    margin-bottom: 1rem;
+}
+
+.clienteForm input {
+    padding: .7rem;
+    border-radius: var(--radius);
+    border: 1px solid var(--color-borde);
+}
+
+.asientosContainer {
+    display: flex;
+    justify-content: center;
+    padding: 1rem;
+    overflow-x: auto;
+    overflow-y: auto;
+    max-height: 45vh;
+}
+
+.reservaActions {
+    display: flex;
+    justify-content: flex-end;
+    gap: 1rem;
+    padding: 1rem 1.5rem;
+    border-top: 1px solid var(--color-borde);
 }
