@@ -16,7 +16,7 @@ export const generarAsientos = (salaId: number, filas: number, columnas: number)
     const asientos: Asiento[] = [];
 
     for (let fila = 0; fila < filas; fila++) {
-        const letraFila = obtenerLetraFila(filas);
+        const letraFila = obtenerLetraFila(fila);
         for (let columna = 1; columna <= columnas; columna++) {
             asientos.push({
                 id: `${salaId}-${letraFila}-${columna}`,

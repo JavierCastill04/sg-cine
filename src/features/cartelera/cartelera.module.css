@@ -3,12 +3,6 @@
     margin: auto;
 }
 
-.pageTitle {
-    text-align: center;
-    margin: 30px 0;
-    font-size: 2rem;
-}
-
 .carteleraGrid {
     display: grid;
     grid-template-columns: repeat(3, 1fr);
@@ -113,4 +107,153 @@
 
 .addButton:hover {
     background: var(--color-enfasis-hover);
+}
+
+.closeButton {
+    color: var(--color-enfasis);
+    border: none;
+    padding: 12px;
+    font-size: 1rem;
+    cursor: pointer;
+    transition: var(--transition);
+}
+
+.closeButton:hover {
+    color: var(--color-enfasis-hover);
+}
+
+.reservarButton {
+    width: auto;
+    flex-shrink: 0;
+    font-weight: 600;
+    background: var(--color-enfasis);
+    color: var(--color-texto);
+    border: none;
+    border-radius: var(--radius);
+    padding: 12px;
+    font-size: 1rem;
+    cursor: pointer;
+    transition: var(--transition);
+}
+
+.reservarButton:hover {
+    background: var(--color-enfasis-hover);
+}
+
+.modalOverlay {
+    position: fixed;
+    inset: 0;
+    background: rgba(0, 0, 0, .6);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 1000;
+}
+
+.modal {
+    color: var(--color-superficie);
+    width: min(850px, 90vw);
+    max-height: 85vh;
+    background: var(--color-fondo);
+    border-radius: var(--radius);
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+}
+
+.header {
+    display: flex;
+    color: var(--color-enfasis);
+    justify-content: space-between;
+    align-items: center;
+    padding: 1rem 1.5rem;
+    border-bottom: 1px solid var(--color-borde);
+}
+
+.peliculaInfo p {
+    padding: 1rem;
+    gap: 1rem;
+    color: var(--color-superficie)
+}
+
+.funcionesContainer {
+    padding: 1.5rem;
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+    overflow-y: auto;
+}
+
+.funcionCard {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    gap: 1rem;
+    padding: 1rem;
+}
+
+.funcionCard p {
+    color: var(--color-superficie);
+    margin: 0;
+}
+
+.funcionInfo {
+    color: var(--color-superficie);
+    display: flex;
+    flex-direction: column;
+    gap: .5rem;
+    flex: 1;
+}
+
+.closeButton {
+    background: none;
+    border: none;
+    cursor: pointer;
+    font-weight: 600;
+}
+
+.reservaModal {
+    width: min(1000px, 90vw);
+    max-height: 90vh;
+    background: var(--color-fondo);
+    border-radius: var(--radius);
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+}
+
+.reservaContenido {
+    padding: 1.5rem;
+    overflow-y: auto;
+}
+
+.clienteForm {
+    display: flex;
+    flex-direction: column;
+    gap: .8rem;
+    margin-bottom: 1rem;
+}
+
+.clienteForm input {
+    padding: .7rem;
+    border-radius: var(--radius);
+    border: 1px solid var(--color-borde);
+}
+
+.asientosContainer {
+    display: flex;
+    justify-content: center;
+    padding: 1rem;
+    overflow-x: auto;
+    overflow-y: auto;
+    max-height: 45vh;
+}
+
+.reservaActions {
+    display: flex;
+    justify-content: flex-end;
+    gap: 1rem;
+    padding: 1rem 1.5rem;
+    border-top: 1px solid var(--color-borde);
 }
