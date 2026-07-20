@@ -8,21 +8,22 @@ export default function CarteleraGrid() {
     const peliculas = useAppSelector(state => state.pelicula);
 
     return (
-        <div className={styles.productGrid}>
+        <div className={styles.carteleraGrid}>
             {peliculas.map((pelicula) => (
-                <div key={pelicula.id} className={styles.productCard}>
-                    <div className={styles.productInfo}>
-                        <h3 className={styles.productTitle}>{pelicula.nombre}</h3>
-                        <p className={styles.etiquetaTitle}>Etiquetas:</p>
+                <div key={pelicula.id} className={styles.carteleraCard}>
+                    <div className={styles.carteleraInfo}>
+                        <h3 className={styles.carteleraTitle}>{pelicula.nombre}</h3>
+                        <p className={styles.carteleraTitle}>Etiquetas:</p>
                         <div className={styles.carteleraEtiquetas}>
-                            <p className={`${styles.productText} ${styles.etiquetaClasificacion}`}>{pelicula.clasificacion}</p>
-                            <p className={`${styles.productText} ${styles.etiquetaGenero}`}>{pelicula.genero}</p>
-                            <p className={`${styles.productText} ${styles.etiquetaDuracion}`}>{pelicula.duracion} minutos</p>
+                            <p className={`${styles.carteleraText} ${styles.etiquetaClasificacion}`}>{pelicula.clasificacion}</p>
+                            <p className={`${styles.carteleraText} ${styles.etiquetaGenero}`}>{pelicula.genero}</p>
+                            <p className={`${styles.carteleraText} ${styles.etiquetaDuracion}`}>{pelicula.duracion} minutos</p>
                         </div>
-                        <button className={styles.addButton}>
-                            Hacer reserva
-                        </button>
+
                     </div>
+                    <button className={styles.addButton}>
+                        Hacer reserva
+                    </button>
                 </div>
             ))}
         </div>

@@ -9,63 +9,55 @@
     font-size: 2rem;
 }
 
-.productGrid {
+.carteleraGrid {
     display: grid;
     grid-template-columns: repeat(3, 1fr);
     gap: 20px;
 }
 
 @media (max-width: 992px) {
-    .productGrid {
+    .carteleraGrid {
         grid-template-columns: repeat(2, 1fr);
     }
 }
 
 @media (max-width: 576px) {
-    .productGrid {
+    .carteleraGrid {
         grid-template-columns: 1fr;
     }
 }
 
-.productCard {
+.carteleraCard {
+    display: flex;
+    flex-direction: column;
+    height: 100%;
     background: var(--color-secundario);
     border-radius: var(--radius);
     overflow: hidden;
     box-shadow: var(--shadow);
     transition: var(--transition);
+
 }
 
-.productCard:hover {
+.carteleraCard:hover {
     transform: translateY(-8px);
     box-shadow: var(--shadow);
 }
 
-.productCard img {
-    width: 100%;
-    height: 320px;
-    object-fit: cover;
-}
-
-.productInfo {
+.carteleraInfo {
     padding: 15px;
     font-size: 1.2rem;
     font-weight: bold;
 }
 
-.productTitle {
+.carteleraTitle {
     margin: px 0;
     min-height: 50px;
     text-align: center;
     color: var(--color-superficie);
 }
 
-.productPrice {
-    color: #008cba;
-    font-size: 1.2rem;
-    font-weight: bold;
-}
-
-.productText {
+.carteleraText {
     font-size: 0.8rem;
     font-weight: bold;
     padding: 0.1rem 0.9rem;
@@ -74,19 +66,18 @@
     border-radius: var(--radius);
 }
 
-.etiquetaTitle{
+.etiquetaTitle {
     font-size: 0.9rem;
     color: var(--color-superficie);
 }
 
 .carteleraEtiquetas {
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+    gap: .5rem;
     margin: 0rem 0.5rem 1rem;
     padding: 0.5rem;
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: center;
-    align-items: center;
-    gap: 0.5rem;
     border: 0.08rem solid var(--color-superficie);
     border-radius: var(--radius);
 }
@@ -97,16 +88,18 @@
 }
 
 .etiquetaDuracion {
-    background-color:green;
+    background-color: green;
     color: var(--color-superficie)
 }
 
 .etiquetaClasificacion {
-    background-color:darkslategrey;
+    background-color: darkslategrey;
     color: var(--color-superficie)
 }
 
 .addButton {
+    font-weight: 600;
+    margin-top: auto;
     width: 100%;
     background: var(--color-enfasis);
     color: var(--color-texto);
