@@ -6,6 +6,8 @@ import { Sala } from "@/types/Sala";
 import { useAppDispatch, useAppSelector } from "@/redux/hooks";
 import { addSala, updateSala } from "@/redux/slices/salaSlice";
 import { Campo, FormData, FormErrors, validarCampo } from "@/features/salas/validarSala";
+import AsientosGrid from "@/components/Asientos/AsientosGrid";
+import { printTreeView } from "next/dist/build/utils";
 
 const initialData: FormData = { nombre: "", filas: "", columnas: "" };
 const initialErrors: FormErrors = { nombre: "", filas: "", columnas: "" };
@@ -19,7 +21,6 @@ export default function RegisterForm({ salaEditando, cancelarEdicion }: SalaForm
     const dispatch = useAppDispatch();
     const [formData, setFormData] = useState<FormData>(initialData);
     const [errores, setErrores] = useState<FormErrors>(initialErrors);
-    const [exito, setExito] = useState<boolean>(false);
     const salas = useAppSelector(state => state.sala);
     useEffect(() => {
         if (salaEditando) {
@@ -41,7 +42,7 @@ export default function RegisterForm({ salaEditando, cancelarEdicion }: SalaForm
     };
 
     const handleSubmit = (): void => {
-        
+
         const nuevosErrores: FormErrors = {
             nombre: validarCampo("nombre", formData.nombre, formData, salas, salaEditando),
             filas: validarCampo("filas", formData.filas, formData, salas, salaEditando),
@@ -108,7 +109,6 @@ export default function RegisterForm({ salaEditando, cancelarEdicion }: SalaForm
                         value={formData[campo]}
                         onChange={(e) => handleChange(campo, e.target.value)}
                     />
-
                     {errores[campo] && (
                         <p className={styles.error}>
                             <TriangleAlert size={14} />
@@ -121,6 +121,12 @@ export default function RegisterForm({ salaEditando, cancelarEdicion }: SalaForm
             <button className={styles.btnFormulario} onClick={handleSubmit}>
                 {salaEditando ? "Guardar cambios" : "Crear sala"}
             </button>
+            <div className={styles.previewContainer}>
+                <AsientosGrid
+                    filas={Number(formData.filas)}
+                    columnas={Number(formData.columnas)}
+                />
+            </div>
         </div >
     );
 }

@@ -122,6 +122,16 @@
     font-weight: 600;
 }
 
+.previewContainer {
+    margin-top: 1rem;
+    max-height: 500px;
+    max-width: 100%;
+    overflow: auto;
+    border: 1px solid var(--color-borde);
+    border-radius: 8px;
+    padding: 1rem;
+}
+
 /*Botones*/
 .btnFormulario {
     width: 100%;
