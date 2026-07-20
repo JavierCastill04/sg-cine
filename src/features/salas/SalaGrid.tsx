@@ -2,7 +2,7 @@
 
 import { removeSala} from "@/redux/slices/salaSlice"
 import { useAppDispatch, useAppSelector } from "@/redux/hooks";
-import { SquarePen, SquareX } from "lucide-react";
+import { Pencil, Trash2 } from "lucide-react";
 import { Sala } from "@/types/Sala";
 
 import styles from "@/features/salas/salas.module.css"
@@ -40,8 +40,8 @@ export default function SalaGrid({editarSala}: Props) {
                             <td>{sala.capacidad.columnas}</td>
                             <td>{sala.capacidad.filas * sala.capacidad.columnas}</td>
                             <td className={styles.actions}>
-                                <button className={styles.iconButton} onClick={()=> editarSala(sala)} ><SquarePen /></button>
-                                <button className={styles.iconButton} onClick={()=> dispatch(removeSala(sala.id))}><SquareX /></button>
+                                <button className={`${styles.iconButton} ${styles.actualizar}`} onClick={()=> editarSala(sala)} ><Pencil /></button>
+                                <button className={`${styles.iconButton} ${styles.eliminar}`}  onClick={()=> dispatch(removeSala(sala.id))}><Trash2 /></button>
                             </td>
                         </tr>
                     ))}

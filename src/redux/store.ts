@@ -1,7 +1,7 @@
 import { configureStore } from "@reduxjs/toolkit";
 import peliculaReducer from "@/redux/slices/peliculaSlice";
 import salaReducer from "@/redux/slices/salaSlice";
-import funcionReduccer from "@/redux/slices/funicionSlice";
+import funcionReduccer from "@/redux/slices/funcionSlice";
 
 export const store = configureStore({
     reducer: {
