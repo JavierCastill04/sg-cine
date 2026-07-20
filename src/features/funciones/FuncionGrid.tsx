@@ -45,7 +45,7 @@ export default function FuncionGrid({ editarFuncion }: Props) {
                                     {peliculas.find(pelicula => pelicula.id === funcion.peliculaId)?.duracion} minutos
                                 </td>
                                 <td>{funcion.fecha}</td>
-                                <td>{funcion.hora}</td>
+                                <td>{funcion.horaInicio}</td>
                                 <td>
                                     {salas.find(sala => sala.id === funcion.salaId)?.nombre}
                                 </td>

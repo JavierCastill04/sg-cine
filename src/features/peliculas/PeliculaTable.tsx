@@ -25,6 +25,8 @@ export default function PeliculaTable({
     (state) => state.pelicula,
   );
 
+  const funciones = useAppSelector((state) => state.funcion);
+
   const peliculasFiltradas = peliculas.filter(
     (pelicula) => {
       const coincideNombre = pelicula.nombre
@@ -46,7 +48,14 @@ export default function PeliculaTable({
     },
   );
 
-  const eliminarPelicula = (id: number): void => {
+  const eliminarPelicula = (id: number) => {
+    const usada = funciones.some(funcion => funcion.salaId === id);
+    if (usada) {
+      console.log(
+        "No se puede eliminar una sala con funciones creadas"
+      );
+      return;
+    }
     dispatch(removePelicula(id));
   };
 
