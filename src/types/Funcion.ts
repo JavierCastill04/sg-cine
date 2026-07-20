@@ -4,7 +4,7 @@ export interface Funcion {
     peliculaId: number;
     salaId: number;
     fecha: string;
-    hora: string;
+    horaInicio: string;
     precio: number;
     estadoAsientos: EstadoAsiento[];
 }

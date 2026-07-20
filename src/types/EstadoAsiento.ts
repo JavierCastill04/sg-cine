@@ -1,4 +1,4 @@
 export interface EstadoAsiento {
-    asientoId: number;
+    asientoId: string;
     estado: "disponible" | "reservado" | "seleccionado";
 }
