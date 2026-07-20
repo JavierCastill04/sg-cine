@@ -4,7 +4,7 @@ import type { Pelicula } from "@/types/Pelicula";
 import { useAppDispatch, useAppSelector } from "@/redux/hooks";
 import { removePelicula } from "@/redux/slices/peliculaSlice";
 import { Pencil, Trash2 } from "lucide-react";
-import styles from "@/components/Peliculas.module.css";
+import styles from "@/features/peliculas/Peliculas.module.css";
 
 interface PeliculaTableProps {
   seleccionarPelicula: (pelicula: Pelicula) => void;
@@ -24,6 +24,8 @@ export default function PeliculaTable({
   const peliculas = useAppSelector(
     (state) => state.pelicula,
   );
+
+  const funciones = useAppSelector((state) => state.funcion);
 
   const peliculasFiltradas = peliculas.filter(
     (pelicula) => {
@@ -46,7 +48,14 @@ export default function PeliculaTable({
     },
   );
 
-  const eliminarPelicula = (id: number): void => {
+  const eliminarPelicula = (id: number) => {
+    const usada = funciones.some(funcion => funcion.salaId === id);
+    if (usada) {
+      console.log(
+        "No se puede eliminar una sala con funciones creadas"
+      );
+      return;
+    }
     dispatch(removePelicula(id));
   };
 

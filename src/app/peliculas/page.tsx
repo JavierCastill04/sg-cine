@@ -1,10 +1,10 @@
 "use client";
 
 import { useState } from "react";
-import styles from "@/components/Peliculas.module.css";
-import PeliculaForm from "@/components/PeliculaForm";
-import PeliculaTable from "@/components/PeliculaTable";
-import BuscadorPeliculas from "@/components/BuscadorPeliculas";
+import styles from "@/features/peliculas/Peliculas.module.css";
+import PeliculaForm from "@/features/peliculas/PeliculaForm";
+import PeliculaTable from "@/features/peliculas/PeliculaTable";
+import BuscadorPeliculas from "@/features/peliculas/BuscadorPeliculas";
 import type { Pelicula } from "@/types/Pelicula";
 
 export default function PeliculasPage() {

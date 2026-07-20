@@ -1,4 +1,4 @@
-import {Sala} from "../types/Sala";
+import {Sala} from "@/types/Sala";
 
 export const salasData: Sala[] = [
     {id: 1, nombre: "Sala 1", capacidad: {filas: 12, columnas: 15}, asientos: []},

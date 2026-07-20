@@ -1,12 +1,13 @@
 import { configureStore } from "@reduxjs/toolkit";
-import peliculaReducer from "./slices/peliculaSlice";
-import salaReducer from "./slices/salaSlice";
+import peliculaReducer from "@/redux/slices/peliculaSlice";
+import salaReducer from "@/redux/slices/salaSlice";
+import funcionReduccer from "@/redux/slices/funcionSlice";
 
 export const store = configureStore({
     reducer: {
-        //Un reducer por modulo
         sala : salaReducer,
         pelicula: peliculaReducer,
+        funcion: funcionReduccer,
     },
 });
 

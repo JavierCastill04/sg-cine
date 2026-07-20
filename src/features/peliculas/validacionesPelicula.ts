@@ -2,7 +2,7 @@ import type { Pelicula } from "@/types/Pelicula";
 import {
   GENEROS,
   CLASIFICACIONES,
-} from "@/components/peliculaOptions";
+} from "@/features/peliculas/peliculaOptions";
 
 export type CampoPelicula =
   | "codigo"

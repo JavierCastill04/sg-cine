@@ -1,11 +1,9 @@
 "use client";
 
 import { useState } from "react";
-import styles from "@/components/Peliculas.module.css";
-
-import CampoFormulario from "@/components/CampoFormulario";
-import SelectFormulario from "@/components/SelectFormulario";
-
+import styles from "@/features/peliculas/Peliculas.module.css";
+import CampoFormulario from "@/features/peliculas/CampoFormulario";
+import SelectFormulario from "@/features/peliculas/SelectFormulario";
 import { useAppDispatch, useAppSelector } from "@/redux/hooks";
 import {
   addPelicula,
@@ -19,12 +17,12 @@ import {
   validarCampo,
   type CampoPelicula,
   type ErroresPelicula,
-} from "@/components/validacionesPelicula";
+} from "@/features/peliculas/validacionesPelicula";
 
 import {
   GENEROS,
   CLASIFICACIONES,
-} from "@/components/peliculaOptions";
+} from "@/features/peliculas/peliculaOptions";
 
 interface PeliculaFormProps {
   peliculaEditando: Pelicula | null;
